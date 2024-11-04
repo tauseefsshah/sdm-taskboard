@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import localFont from "next/font/local";
 
 // React Tabs
@@ -62,6 +62,18 @@ export default function Home() {
     },
   ]);
 
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      console.log(111)
+    } else if (e.key === "ArrowUp") {
+      console.log(222)
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
     <main
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
@@ -86,18 +98,18 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              <ReactSortable list={tasks} setList={setTasks}>
-                {tasks.map(task => (
-                  <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
-                    <td>{task.id}</td>
-                    <td>{task.name}</td>
-                    <td>{task.labels[0]}</td>
-                    <td>{task.status}</td>
-                    <td>{task.priority}</td>
-                    <td>{task.assignee}</td>
-                  </tr>
-                ))}
-              </ReactSortable>
+              {/* <ReactSortable list={tasks} setList={setTasks}> */}
+              {tasks.map(task => (
+                <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
+                  <td>{task.id}</td>
+                  <td>{task.name}</td>
+                  <td>{task.labels[0]}</td>
+                  <td>{task.status}</td>
+                  <td>{task.priority}</td>
+                  <td>{task.assignee}</td>
+                </tr>
+              ))}
+              {/* </ReactSortable> */}
             </tbody>
           </table>
         </TabPanel>
