@@ -1,7 +1,12 @@
+import { useState } from "react";
 import localFont from "next/font/local";
 
+// React Tabs
 import 'react-tabs/style/react-tabs.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
+// React Sortable
+import { ReactSortable } from "react-sortablejs";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +20,7 @@ const geistMono = localFont({
 });
 
 export default function Home() {
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       assignee: "Tauseef Shah",
@@ -55,7 +60,7 @@ export default function Home() {
       due_at: "2023-11-22T13:10:13.649Z",
       priority: "Urgent"
     },
-  ];
+  ]);
 
   return (
     <main
@@ -81,16 +86,18 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {tasks.map(task => (
-                <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
-                  <td>{task.id}</td>
-                  <td>{task.name}</td>
-                  <td>{task.labels[0]}</td>
-                  <td>{task.status}</td>
-                  <td>{task.priority}</td>
-                  <td>{task.assignee}</td>
-                </tr>
-              ))}
+              <ReactSortable list={tasks} setList={setTasks}>
+                {tasks.map(task => (
+                  <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
+                    <td>{task.id}</td>
+                    <td>{task.name}</td>
+                    <td>{task.labels[0]}</td>
+                    <td>{task.status}</td>
+                    <td>{task.priority}</td>
+                    <td>{task.assignee}</td>
+                  </tr>
+                ))}
+              </ReactSortable>
             </tbody>
           </table>
         </TabPanel>
