@@ -1,5 +1,8 @@
 import localFont from "next/font/local";
 
+import 'react-tabs/style/react-tabs.css';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -14,9 +17,26 @@ const geistMono = localFont({
 export default function Home() {
   return (
     <main
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
     >
-      hi
+      <p>.</p>
+      <Tabs>
+        <TabList>
+          <Tab>Open</Tab>
+          <Tab>In Progress</Tab>
+          <Tab>Closed</Tab>
+        </TabList>
+
+        <TabPanel>
+          <h2>Open Tasks</h2>
+        </TabPanel>
+        <TabPanel>
+          <h2>In Progress Tasks</h2>
+        </TabPanel>
+        <TabPanel>
+          <h2>Closed Tasks</h2>
+        </TabPanel>
+      </Tabs>
     </main>
   );
 }
