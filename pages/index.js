@@ -15,11 +15,52 @@ const geistMono = localFont({
 });
 
 export default function Home() {
+  const tasks = [
+    {
+      id: 1,
+      assignee: "Tauseef Shah",
+      name: "File upload for chats",
+      labels: [
+        "Update pending"
+      ],
+      status: "Open",
+      created_at: "2023-11-22T13:10:13.649Z",
+      updated_at: "2023-11-22T13:10:13.649Z",
+      due_at: "2023-11-22T13:10:13.649Z",
+      priority: "Urgent"
+    },
+    {
+      id: 2,
+      assignee: "Tauseef Shah",
+      name: "File upload for chats",
+      labels: [
+        "Update pending"
+      ],
+      status: "Open",
+      created_at: "2023-11-22T13:10:13.649Z",
+      updated_at: "2023-11-22T13:10:13.649Z",
+      due_at: "2023-11-22T13:10:13.649Z",
+      priority: "Urgent"
+    },
+    {
+      id: 3,
+      assignee: "Tauseef Shah",
+      name: "File upload for chats",
+      labels: [
+        "Update pending"
+      ],
+      status: "Open",
+      created_at: "2023-11-22T13:10:13.649Z",
+      updated_at: "2023-11-22T13:10:13.649Z",
+      due_at: "2023-11-22T13:10:13.649Z",
+      priority: "Urgent"
+    },
+  ];
+
   return (
     <main
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
     >
-      <p>.</p>
       <Tabs>
         <TabList>
           <Tab>Open</Tab>
@@ -28,7 +69,30 @@ export default function Home() {
         </TabList>
 
         <TabPanel>
-          <h2>Open Tasks</h2>
+          <table className="w-full">
+            <thead>
+              <tr className="flex gap-2 justify-between items-center">
+                <th>#</th>
+                <th>Name</th>
+                <th>Labels</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Assignee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tasks.map(task => (
+                <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
+                  <td>{task.id}</td>
+                  <td>{task.name}</td>
+                  <td>{task.labels[0]}</td>
+                  <td>{task.status}</td>
+                  <td>{task.priority}</td>
+                  <td>{task.assignee}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </TabPanel>
         <TabPanel>
           <h2>In Progress Tasks</h2>
