@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 export function TaskList({ status, allTasks, setAllTasks }) {
   const currentListAllTasks = allTasks.filter((task) => task.status == status);
 
-  const [currentListTasks, setCurrentListTasks] = useState(currentListAllTasks);
+  const [currentListTasks, setCurrentListTasks] = useState([]);
 
   const [isTaskOpen, setIsTaskOpen] = useState(false);
 
   const [taskIndex, setTaskIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentListTasks(currentListAllTasks);
+  }, [currentListAllTasks, setCurrentListTasks]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown" && taskIndex != currentListTasks.length - 1) {
