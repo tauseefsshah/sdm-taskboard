@@ -1,10 +1,10 @@
 import localFont from "next/font/local";
+import { useEffect, useState } from "react";
 import { TaskList } from "@/components/TaskList";
 
 // React Tabs
 import "react-tabs/style/react-tabs.css";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

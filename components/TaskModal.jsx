@@ -1,8 +1,17 @@
-export function TaskModal({ task, onClose }) {
+import { useEffect, useState } from "react";
+import Alert from "./Alert";
+
+export function TaskModal({ task, setIsTaskOpen }) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    setIsTaskOpen(isOpen);
+  }, [isOpen, setIsTaskOpen]);
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60">
-      <div className="max-w-screen-md mx-auto fixed inset-0 flex justify-center items-center">
-        <div className="bg-white p-6 rounded-lg w-full">
+    <div>
+      {isOpen && (
+        <Alert setIsOpen={setIsOpen}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 justify-between items-start lg:flex-row lg:items-center">
               <h2 className="text-xl font-bold">{task.name}</h2>
@@ -33,7 +42,7 @@ export function TaskModal({ task, onClose }) {
             </div>
             <div>
               <label className="font-bold mr-2">Status:</label>
-              <select value={task.status} className="p-2 border rounded">
+              <select defaultValue={task.status} className="p-2 border rounded">
                 <option value="open">Open</option>
                 <option value="in-progress">In Progress</option>
                 <option value="closed">Closed</option>
@@ -49,7 +58,10 @@ export function TaskModal({ task, onClose }) {
                 "Tempora voluptas fugiat perferendis earum impedit hic molestiae ab modi dicta rem",
                 "Iusto fugiat quaerat vero repellendus harum optio nisi, earum molestiae quis! Dignissimos atque doloribus illum numquam?",
               ].map((comment, commentIndex) => (
-                <div key={commentIndex}><span className="font-bold">Jhon Doe (2m ago)</span> - {comment}</div>
+                <div key={commentIndex}>
+                  <span className="font-bold">Jhon Doe (2m ago)</span> -{" "}
+                  {comment}
+                </div>
               ))}
             </div>
             <div>
@@ -66,12 +78,15 @@ export function TaskModal({ task, onClose }) {
               Save
             </button>
 
-            <button onClick={onClose} className="px-4 py-2 bg-gray-100 rounded">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="px-4 py-2 bg-gray-100 rounded"
+            >
               Cancel
             </button>
           </div>
-        </div>
-      </div>
+        </Alert>
+      )}
     </div>
   );
 }

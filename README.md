@@ -25,3 +25,4 @@ Go through to commits to see how the app progressed. I was told by someone that 
 
 ## Known Issues
 - After clicking on search, the tabs loose focus and arrow keys don't work to navigate
+- After modal is opened, the tabs loose focus and arrow keys don't work to navigate

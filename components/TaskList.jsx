@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { TaskModal } from "./TaskModal";
+import { useEffect, useState } from "react";
 
 export function TaskList({ tasks }) {
   const [allTasks, setAllTasks] = useState([]);
@@ -8,7 +8,7 @@ export function TaskList({ tasks }) {
     setAllTasks(tasks);
   }, [tasks]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTaskOpen, setIsTaskOpen] = useState(false);
 
   const [taskIndex, setTaskIndex] = useState(0);
 
@@ -22,11 +22,11 @@ export function TaskList({ tasks }) {
     }
 
     if (e.key === "Enter") {
-      setIsModalOpen(true);
+      setIsTaskOpen(true);
     }
 
     if (e.key === "Escape") {
-      setIsModalOpen(false);
+      setIsTaskOpen(false);
     }
   };
 
@@ -87,7 +87,7 @@ export function TaskList({ tasks }) {
             (taskIndex == index ? "bg-black/10" : "")
           }
           onClick={() => setTaskIndex(index)}
-          onDoubleClick={() => setIsModalOpen(true)}
+          onDoubleClick={() => setIsTaskOpen(true)}
         >
           <div>{task.id}</div>
           <div className="col-span-3">{task.name}</div>
@@ -105,11 +105,11 @@ export function TaskList({ tasks }) {
         </div>
       ))}
 
-      {isModalOpen && (
+      {isTaskOpen && (
         <TaskModal
           task={tasks[taskIndex]}
-          onClose={() => setIsModalOpen(false)}
-        />
+          setIsTaskOpen={setIsTaskOpen}
+        ></TaskModal>
       )}
     </div>
   );
