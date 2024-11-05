@@ -62,17 +62,25 @@ export default function Home() {
     },
   ]);
 
+  const [taskIndex, setTaskIndex] = useState(0);
+
   const handleKeyDown = (e) => {
-    if (e.key === "ArrowDown") {
-      console.log(111)
-    } else if (e.key === "ArrowUp") {
-      console.log(222)
+    if (e.key === "ArrowDown" && taskIndex != tasks.length - 1) {
+      setTaskIndex(taskIndex + 1);
+    }
+
+    if (e.key === "ArrowUp" && taskIndex != 0) {
+      setTaskIndex(taskIndex - 1);
     }
   };
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
-  }, []);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   return (
     <main
@@ -80,9 +88,9 @@ export default function Home() {
     >
       <Tabs>
         <TabList>
-          <Tab>Open</Tab>
-          <Tab>In Progress</Tab>
-          <Tab>Closed</Tab>
+          <Tab>🟡 Open</Tab>
+          <Tab>🚧 In Progress</Tab>
+          <Tab>✅ Closed</Tab>
         </TabList>
 
         <TabPanel>
@@ -99,8 +107,10 @@ export default function Home() {
             </thead>
             <tbody>
               {/* <ReactSortable list={tasks} setList={setTasks}> */}
-              {tasks.map(task => (
-                <tr key={task.id} className="flex gap-2 justify-between items-center even:bg-gray-50 px-2 py-4">
+              {tasks.map((task, index) => (
+                <tr key={task.id} className={
+                  `flex gap-2 justify-between items-center px-2 py-4 ` + (taskIndex == index ? "bg-red-50" : "")
+                }>
                   <td>{task.id}</td>
                   <td>{task.name}</td>
                   <td>{task.labels[0]}</td>
