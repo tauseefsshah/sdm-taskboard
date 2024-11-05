@@ -22,36 +22,39 @@ export function TaskList({ tasks }) {
   });
 
   return (
-    <table className="w-full">
-      <thead>
-        <tr className="flex gap-2 justify-between items-center">
-          <th>#</th>
-          <th>Name</th>
-          <th>Labels</th>
-          <th>Status</th>
-          <th>Priority</th>
-          <th>Assignee</th>
-        </tr>
-      </thead>
-      <tbody>
-        {tasks.map((task, index) => (
-          <tr
-            key={task.id}
-            className={
-              `flex gap-2 justify-between items-center px-2 py-4 ` +
-              (taskIndex == index ? "bg-black/10" : "")
-            }
-            onClick={() => setTaskIndex(index)}
-          >
-            <td>{task.id}</td>
-            <td>{task.name}</td>
-            <td>{task.labels[0]}</td>
-            <td>{task.status}</td>
-            <td>{task.priority}</td>
-            <td>{task.assignee}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="w-full">
+      <div className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-8">
+        <div>#</div>
+        <div className="col-span-3">Name</div>
+        <div className="hidden lg:block">Labels</div>
+        <div className="hidden lg:block">Priority</div>
+        <div className="col-span-2">Assignee</div>
+      </div>
+
+      {tasks.map((task, index) => (
+        <div
+          key={task.id}
+          className={
+            `grid grid-cols-6 gap-1 items-center text-center px-2 py-4 text-sm lg:grid-cols-8 ` +
+            (taskIndex == index ? "bg-black/10" : "")
+          }
+          onClick={() => setTaskIndex(index)}
+        >
+          <div>{task.id}</div>
+          <div className="col-span-3">{task.name}</div>
+          <div className="hidden lg:block">
+            <span className="px-2 py-1 bg-black text-white rounded-xl">
+              {task.label}
+            </span>
+          </div>
+          <div className="hidden lg:block">
+            <span className="px-2 py-1 bg-red-500 text-white rounded-xl">
+              {task.priority}
+            </span>
+          </div>
+          <div className="col-span-2">{task.assignee}</div>
+        </div>
+      ))}
+    </div>
   );
 }

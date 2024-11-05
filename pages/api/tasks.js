@@ -8,9 +8,9 @@ export default function handle(req, res) {
       id: i,
       assignee: faker.person.fullName(),
       name: faker.lorem.words(),
-      labels: [
-        "Pending"
-      ],
+      label: faker.helpers.arrayElement([
+        'Solved', 'Bug'
+      ]),
       status: faker.helpers.arrayElement([
         'open', 'in-progress', 'closed'
       ]),
