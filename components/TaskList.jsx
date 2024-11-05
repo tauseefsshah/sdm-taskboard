@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { TaskModal } from "./TaskModal";
 
 export function TaskList({ tasks }) {
-  const [allTasks, setAllTasks] = useState(tasks);
+  const [allTasks, setAllTasks] = useState([]);
+
+  useEffect(() => {
+    setAllTasks(tasks);
+  }, [tasks]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
