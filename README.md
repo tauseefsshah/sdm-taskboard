@@ -14,6 +14,9 @@ pnpm dev
 bun dev
 ```
 
+## How
+Go through to commits to see how the app progressed. I was told by someone that commit messages tell the story of the codebase and I try to write this story with all my works.
+
 ## Design Choices
 - **File Based Routing** - Not a fan of app router 🧛
 - **Client-side Data Fetching** - I am using `fetch()` with `useEffect()` to get data from the `api/tasks` endpoint rather than `get*Props()` to keep things simple
