@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import { TaskModal } from "./TaskModal";
 
 export function TaskList({ tasks }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [taskIndex, setTaskIndex] = useState(0);
 
   const handleKeyDown = (e) => {
@@ -10,6 +13,14 @@ export function TaskList({ tasks }) {
 
     if (e.key === "ArrowUp" && taskIndex != 0) {
       setTaskIndex(taskIndex - 1);
+    }
+
+    if (e.key === "Enter") {
+      setIsModalOpen(true);
+    }
+
+    if (e.key === "Escape") {
+      setIsModalOpen(false);
     }
   };
 
@@ -39,6 +50,7 @@ export function TaskList({ tasks }) {
             (taskIndex == index ? "bg-black/10" : "")
           }
           onClick={() => setTaskIndex(index)}
+          onDoubleClick={() => setIsModalOpen(true)}
         >
           <div>{task.id}</div>
           <div className="col-span-3">{task.name}</div>
@@ -55,6 +67,13 @@ export function TaskList({ tasks }) {
           <div className="col-span-2">{task.assignee}</div>
         </div>
       ))}
+
+      {isModalOpen && (
+        <TaskModal
+          task={tasks[taskIndex]}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
