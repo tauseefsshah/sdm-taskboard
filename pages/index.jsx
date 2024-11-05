@@ -50,7 +50,7 @@ export default function Home() {
 
         <TabPanel>
           <TaskList
-            tasks={tasks.filter((task) => task.status == "open")}
+            status="open"
             allTasks={tasks}
             setAllTasks={setTasks}
           />
@@ -58,7 +58,7 @@ export default function Home() {
 
         <TabPanel>
           <TaskList
-            tasks={tasks.filter((task) => task.status == "in-progress")}
+            status="in-progress"
             allTasks={tasks}
             setAllTasks={setTasks}
           />
@@ -66,7 +66,7 @@ export default function Home() {
 
         <TabPanel>
           <TaskList
-            tasks={tasks.filter((task) => task.status == "closed")}
+            status="closed"
             allTasks={tasks}
             setAllTasks={setTasks}
           />

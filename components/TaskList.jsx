@@ -1,15 +1,17 @@
 import { TaskModal } from "./TaskModal";
 import { useEffect, useState } from "react";
 
-export function TaskList({ tasks, allTasks, setAllTasks }) {
-  const [currentListTasks, setCurrentListTasks] = useState(tasks);
+export function TaskList({ status, allTasks, setAllTasks }) {
+  const currentListAllTasks = allTasks.filter((task) => task.status == status);
+
+  const [currentListTasks, setCurrentListTasks] = useState(currentListAllTasks);
 
   const [isTaskOpen, setIsTaskOpen] = useState(false);
 
   const [taskIndex, setTaskIndex] = useState(0);
 
   const handleKeyDown = (e) => {
-    if (e.key === "ArrowDown" && taskIndex != tasks.length - 1) {
+    if (e.key === "ArrowDown" && taskIndex != currentListTasks.length - 1) {
       setTaskIndex(taskIndex + 1);
     }
 
@@ -38,7 +40,8 @@ export function TaskList({ tasks, allTasks, setAllTasks }) {
     <div className="w-full flex flex-col gap-8">
       <div className="grid grid-cols-2 items-center gap-4 text-sm lg:grid-cols-4">
         <p>
-          <span className="font-bold">📊 Total Tasks:</span> {tasks.length}
+          <span className="font-bold">📊 Total Tasks:</span>{" "}
+          {currentListTasks.length}
         </p>
         <p>
           <span className="font-bold">😣 Urgent Priority:</span>{" "}
@@ -62,7 +65,9 @@ export function TaskList({ tasks, allTasks, setAllTasks }) {
           className="border-2 w-full p-2 rounded-lg"
           onChange={(e) =>
             setCurrentListTasks(
-              tasks.filter((task) => task.name.includes(e.target.value))
+              currentListAllTasks.filter((task) =>
+                task.name.includes(e.target.value)
+              )
             )
           }
         />
@@ -103,7 +108,7 @@ export function TaskList({ tasks, allTasks, setAllTasks }) {
 
       {isTaskOpen && (
         <TaskModal
-          task={tasks[taskIndex]}
+          task={currentListTasks[taskIndex]}
           allTasks={allTasks}
           setAllTasks={setAllTasks}
           setIsTaskOpen={setIsTaskOpen}
