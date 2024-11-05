@@ -42,12 +42,12 @@ export function TaskList({ tasks }) {
         >
           <div>{task.id}</div>
           <div className="col-span-3">{task.name}</div>
-          <div className="hidden lg:block">
+          <div className="text-xs font-bold hidden lg:block">
             <span className="px-2 py-1 bg-black text-white rounded-xl">
               {task.label}
             </span>
           </div>
-          <div className="hidden lg:block">
+          <div className="text-xs font-bold hidden lg:block">
             <span className="px-2 py-1 bg-red-500 text-white rounded-xl">
               {task.priority}
             </span>
