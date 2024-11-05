@@ -3,20 +3,62 @@ export function TaskModal({ task, onClose }) {
     <div className="fixed inset-0 bg-black bg-opacity-60">
       <div className="max-w-screen-md mx-auto fixed inset-0 flex justify-center items-center">
         <div className="bg-white p-6 rounded-lg w-full">
-          <h2 className="text-xl mb-4">{task.name}</h2>
-          <p>{task.assignee}</p>
-          <p>{task.label}</p>
-          <p>{task.status}</p>
-          <p>{task.created_at}</p>
-          <p>{task.due_at}</p>
-          <p>{task.priority}</p>
-          <div className="mt-4">
-            <label>Status:</label>
-            <select value={task.status} className="p-2 border rounded">
-              <option value="open">Open</option>
-              <option value="in-progress">In Progress</option>
-              <option value="closed">Closed</option>
-            </select>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 justify-between items-start lg:flex-row lg:items-center">
+              <h2 className="text-xl font-bold">{task.name}</h2>
+              <p title="Priority">
+                <span className="px-2 py-1 bg-red-500 text-white rounded-xl text-sm font-bold">
+                  {task.priority}
+                </span>
+              </p>
+            </div>
+            <p>
+              <span className="font-bold">Assignee:</span> {task.assignee}
+            </p>
+            <div className="flex justify-between">
+              <p title="Label">
+                <span className="font-bold">Label:</span>
+                <span className="ml-2 px-2 py-1 bg-black text-white rounded-xl text-sm font-bold">
+                  {task.label}
+                </span>
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 justify-between items-start lg:flex-row lg:items-center">
+              <p>
+                <span className="font-bold">Created At:</span> {task.created_at}
+              </p>
+              <p>
+                <span className="font-bold">Due At:</span> {task.due_at}
+              </p>
+            </div>
+            <div>
+              <label className="font-bold mr-2">Status:</label>
+              <select value={task.status} className="p-2 border rounded">
+                <option value="open">Open</option>
+                <option value="in-progress">In Progress</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="comments" className="mt-4 flex flex-col gap-2">
+            <h5 className="text-black text-xl font-bold">Comments</h5>
+            <div className="flex flex-col gap-4 text-black/70 text-sm">
+              {[
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, dolor.",
+                "Tempora voluptas fugiat perferendis earum impedit hic molestiae ab modi dicta rem",
+                "Iusto fugiat quaerat vero repellendus harum optio nisi, earum molestiae quis! Dignissimos atque doloribus illum numquam?",
+              ].map((comment, commentIndex) => (
+                <div key={commentIndex}><span className="font-bold">Jhon Doe (2m ago)</span> - {comment}</div>
+              ))}
+            </div>
+            <div>
+              <textarea
+                className="border-2 p-2 w-full"
+                rows={5}
+                placeholder="Write new comment here, press enter to submit"
+              ></textarea>
+            </div>
           </div>
 
           <div className="mt-4 flex gap-4">
