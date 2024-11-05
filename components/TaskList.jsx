@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { TaskModal } from "./TaskModal";
 
 export function TaskList({ tasks }) {
+  const [allTasks, setAllTasks] = useState(tasks);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [taskIndex, setTaskIndex] = useState(0);
@@ -33,7 +35,38 @@ export function TaskList({ tasks }) {
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-8">
+      <div className="grid grid-cols-2 items-center gap-4 text-sm lg:grid-cols-4">
+        <p>
+          <span className="font-bold">📊 Total Tasks:</span> {tasks.length}
+        </p>
+        <p>
+          <span className="font-bold">😣 Urgent Priority:</span>{" "}
+          {tasks.filter((task) => task.priority == "urgent").length}
+        </p>
+        <p>
+          <span className="font-bold">🙁 Medium Priority:</span>{" "}
+          {tasks.filter((task) => task.priority == "medium").length}
+        </p>
+        <p>
+          <span className="font-bold">😕 Low Priority:</span>{" "}
+          {tasks.filter((task) => task.priority == "low").length}
+        </p>
+      </div>
+      <div id="search">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search Tasks"
+          className="border-2 w-full p-2 rounded-lg"
+          onChange={(e) =>
+            setAllTasks(
+              tasks.filter((task) => task.name.includes(e.target.value))
+            )
+          }
+        />
+      </div>
       <div className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-8">
         <div>#</div>
         <div className="col-span-3">Name</div>
@@ -42,7 +75,7 @@ export function TaskList({ tasks }) {
         <div className="col-span-2">Assignee</div>
       </div>
 
-      {tasks.map((task, index) => (
+      {allTasks.map((task, index) => (
         <div
           key={task.id}
           className={
