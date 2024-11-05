@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <main
-      className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
+      className={`${geistSans.variable} ${geistMono.variable} mx-auto p-2 bg-white lg:p-8`}
     >
       <Tabs selectedTabClassName="bg-black/50 text-white rounded-xl">
         <TabList className="flex justify-between mb-12 uppercase font-black">

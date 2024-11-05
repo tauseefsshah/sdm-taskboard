@@ -9,7 +9,7 @@ export default function handle(req, res) {
       assignee: faker.person.fullName(),
       name: faker.lorem.words(),
       labels: [
-        "Update pending"
+        "Pending"
       ],
       status: faker.helpers.arrayElement([
         'open', 'in-progress', 'closed'
