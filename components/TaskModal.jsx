@@ -1,14 +1,26 @@
-import { useEffect, useState } from "react";
 import Alert from "./Alert";
+import { useEffect, useState } from "react";
 
-export function TaskModal({ task, setIsTaskOpen }) {
+export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
   const [isOpen, setIsOpen] = useState(true);
+
+  const [status, setStatus] = useState(task.status);
 
   const [confirmAction, setConfirmAction] = useState(false);
 
   useEffect(() => {
     setIsTaskOpen(isOpen);
   }, [isOpen, setIsTaskOpen]);
+
+  const updateTaskStatus = () => {
+    let newTasks = [...allTasks];
+
+    newTasks[
+      newTasks.findIndex((singleTask) => singleTask.id == task.id)
+    ].status = status;
+
+    setAllTasks(newTasks);
+  };
 
   return (
     <div>
@@ -44,7 +56,11 @@ export function TaskModal({ task, setIsTaskOpen }) {
             </div>
             <div>
               <label className="font-bold mr-2">Status:</label>
-              <select defaultValue={task.status} className="p-2 border rounded">
+              <select
+                value={status}
+                className="p-2 border rounded"
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <option value="open">Open</option>
                 <option value="in-progress">In Progress</option>
                 <option value="closed">Closed</option>
@@ -99,7 +115,11 @@ export function TaskModal({ task, setIsTaskOpen }) {
                 </p>
                 <div className="mt-4 flex gap-4">
                   <button
-                    onClick={() => console.log("Make Changes")}
+                    onClick={() => {
+                      updateTaskStatus();
+                      setIsOpen(false);
+                      setConfirmAction(false);
+                    }}
                     className="px-4 py-2 bg-black text-white rounded"
                   >
                     Save

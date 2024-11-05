@@ -42,26 +42,34 @@ export default function Home() {
         disableUpDownKeys={true}
         selectedTabClassName="bg-black/50 text-white rounded-xl"
       >
-        <TabList
-          className="flex justify-between mb-12 uppercase font-bold text-sm lg:text-md"
-        >
+        <TabList className="flex justify-between mb-12 uppercase font-bold text-sm lg:text-md">
           <Tab>🔴 Open</Tab>
           <Tab>🟡 In Progress</Tab>
           <Tab>✅ Closed</Tab>
         </TabList>
 
         <TabPanel>
-          <TaskList tasks={tasks.filter((task) => task.status == "open")} />
+          <TaskList
+            tasks={tasks.filter((task) => task.status == "open")}
+            allTasks={tasks}
+            setAllTasks={setTasks}
+          />
         </TabPanel>
 
         <TabPanel>
           <TaskList
             tasks={tasks.filter((task) => task.status == "in-progress")}
+            allTasks={tasks}
+            setAllTasks={setTasks}
           />
         </TabPanel>
 
         <TabPanel>
-          <TaskList tasks={tasks.filter((task) => task.status == "closed")} />
+          <TaskList
+            tasks={tasks.filter((task) => task.status == "closed")}
+            allTasks={tasks}
+            setAllTasks={setTasks}
+          />
         </TabPanel>
       </Tabs>
     </main>

@@ -1,12 +1,8 @@
 import { TaskModal } from "./TaskModal";
 import { useEffect, useState } from "react";
 
-export function TaskList({ tasks }) {
-  const [allTasks, setAllTasks] = useState([]);
-
-  useEffect(() => {
-    setAllTasks(tasks);
-  }, [tasks]);
+export function TaskList({ tasks, allTasks, setAllTasks }) {
+  const [currentListTasks, setCurrentListTasks] = useState(tasks);
 
   const [isTaskOpen, setIsTaskOpen] = useState(false);
 
@@ -46,15 +42,15 @@ export function TaskList({ tasks }) {
         </p>
         <p>
           <span className="font-bold">😣 Urgent Priority:</span>{" "}
-          {tasks.filter((task) => task.priority == "urgent").length}
+          {currentListTasks.filter((task) => task.priority == "urgent").length}
         </p>
         <p>
           <span className="font-bold">🙁 Medium Priority:</span>{" "}
-          {tasks.filter((task) => task.priority == "medium").length}
+          {currentListTasks.filter((task) => task.priority == "medium").length}
         </p>
         <p>
           <span className="font-bold">😕 Low Priority:</span>{" "}
-          {tasks.filter((task) => task.priority == "low").length}
+          {currentListTasks.filter((task) => task.priority == "low").length}
         </p>
       </div>
       <div id="search">
@@ -65,7 +61,7 @@ export function TaskList({ tasks }) {
           placeholder="Search Tasks"
           className="border-2 w-full p-2 rounded-lg"
           onChange={(e) =>
-            setAllTasks(
+            setCurrentListTasks(
               tasks.filter((task) => task.name.includes(e.target.value))
             )
           }
@@ -79,7 +75,7 @@ export function TaskList({ tasks }) {
         <div className="col-span-2">Assignee</div>
       </div>
 
-      {allTasks.map((task, index) => (
+      {currentListTasks.map((task, index) => (
         <div
           key={task.id}
           className={
@@ -108,6 +104,8 @@ export function TaskList({ tasks }) {
       {isTaskOpen && (
         <TaskModal
           task={tasks[taskIndex]}
+          allTasks={allTasks}
+          setAllTasks={setAllTasks}
           setIsTaskOpen={setIsTaskOpen}
         ></TaskModal>
       )}
