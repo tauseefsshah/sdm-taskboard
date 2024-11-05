@@ -4,6 +4,8 @@ import Alert from "./Alert";
 export function TaskModal({ task, setIsTaskOpen }) {
   const [isOpen, setIsOpen] = useState(true);
 
+  const [confirmAction, setConfirmAction] = useState(false);
+
   useEffect(() => {
     setIsTaskOpen(isOpen);
   }, [isOpen, setIsTaskOpen]);
@@ -74,7 +76,10 @@ export function TaskModal({ task, setIsTaskOpen }) {
           </div>
 
           <div className="mt-4 flex gap-4">
-            <button className="px-4 py-2 bg-black text-white rounded">
+            <button
+              onClick={() => setConfirmAction(true)}
+              className="px-4 py-2 bg-black text-white rounded"
+            >
               Save
             </button>
 
@@ -85,6 +90,31 @@ export function TaskModal({ task, setIsTaskOpen }) {
               Cancel
             </button>
           </div>
+
+          {confirmAction && (
+            <Alert setIsOpen={setConfirmAction}>
+              <div className="p-4">
+                <p className="text-lg">
+                  Are you sure you want to update the status?
+                </p>
+                <div className="mt-4 flex gap-4">
+                  <button
+                    onClick={() => console.log("Make Changes")}
+                    className="px-4 py-2 bg-black text-white rounded"
+                  >
+                    Save
+                  </button>
+
+                  <button
+                    onClick={() => setConfirmAction(false)}
+                    className="px-4 py-2 bg-gray-100 rounded"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </Alert>
+          )}
         </Alert>
       )}
     </div>
