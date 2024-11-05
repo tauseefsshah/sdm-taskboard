@@ -2,8 +2,9 @@ import localFont from "next/font/local";
 import { TaskList } from "@/components/TaskList";
 
 // React Tabs
-import 'react-tabs/style/react-tabs.css';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import "react-tabs/style/react-tabs.css";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useEffect, useState } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,55 +18,26 @@ const geistMono = localFont({
 });
 
 export default function Home() {
-  const tasks = [
-    {
-      id: 1,
-      assignee: "Tauseef Shah",
-      name: "File upload for chats",
-      labels: [
-        "Update pending"
-      ],
-      status: "Open",
-      created_at: "2023-11-22T13:10:13.649Z",
-      updated_at: "2023-11-22T13:10:13.649Z",
-      due_at: "2023-11-22T13:10:13.649Z",
-      priority: "Urgent"
-    },
-    {
-      id: 2,
-      assignee: "Tauseef Shah",
-      name: "File upload for chats",
-      labels: [
-        "Update pending"
-      ],
-      status: "Open",
-      created_at: "2023-11-22T13:10:13.649Z",
-      updated_at: "2023-11-22T13:10:13.649Z",
-      due_at: "2023-11-22T13:10:13.649Z",
-      priority: "Urgent"
-    },
-    {
-      id: 3,
-      assignee: "Tauseef Shah",
-      name: "File upload for chats",
-      labels: [
-        "Update pending"
-      ],
-      status: "Open",
-      created_at: "2023-11-22T13:10:13.649Z",
-      updated_at: "2023-11-22T13:10:13.649Z",
-      due_at: "2023-11-22T13:10:13.649Z",
-      priority: "Urgent"
-    },
-  ];
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/tasks")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <main
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
     >
-      <Tabs
-        selectedTabClassName="bg-black/50 text-white rounded-xl"
-      >
+      <Tabs selectedTabClassName="bg-black/50 text-white rounded-xl">
         <TabList className="flex justify-between mb-12 uppercase font-black">
           <Tab>🔴 Open</Tab>
           <Tab>🟡 In Progress</Tab>
@@ -73,15 +45,17 @@ export default function Home() {
         </TabList>
 
         <TabPanel>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks.filter((task) => task.status == "open")} />
         </TabPanel>
 
         <TabPanel>
-          <TaskList tasks={tasks} />
+          <TaskList
+            tasks={tasks.filter((task) => task.status == "in-progress")}
+          />
         </TabPanel>
 
         <TabPanel>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks.filter((task) => task.status == "closed")} />
         </TabPanel>
       </Tabs>
     </main>
