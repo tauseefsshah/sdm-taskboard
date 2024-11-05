@@ -38,6 +38,7 @@ export default function Home() {
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-2 bg-white lg:p-8`}
     >
       <Tabs
+        defaultFocus={true}
         disableUpDownKeys={true}
         selectedTabClassName="bg-black/50 text-white rounded-xl"
       >
