@@ -37,8 +37,13 @@ export default function Home() {
     <main
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-2 bg-white lg:p-8`}
     >
-      <Tabs selectedTabClassName="bg-black/50 text-white rounded-xl">
-        <TabList className="flex justify-between mb-12 uppercase font-black">
+      <Tabs
+        disableUpDownKeys={true}
+        selectedTabClassName="bg-black/50 text-white rounded-xl"
+      >
+        <TabList
+          className="flex justify-between mb-12 uppercase font-bold text-sm lg:text-md"
+        >
           <Tab>🔴 Open</Tab>
           <Tab>🟡 In Progress</Tab>
           <Tab>✅ Closed</Tab>
