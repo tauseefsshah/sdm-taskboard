@@ -86,10 +86,12 @@ export default function Home() {
     <main
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-8 bg-white`}
     >
-      <Tabs>
-        <TabList>
-          <Tab>🟡 Open</Tab>
-          <Tab>🚧 In Progress</Tab>
+      <Tabs
+        selectedTabClassName="bg-black/50 text-white rounded-xl"
+      >
+        <TabList className="flex justify-between mb-12 uppercase font-black">
+          <Tab>🔴 Open</Tab>
+          <Tab>🟡 In Progress</Tab>
           <Tab>✅ Closed</Tab>
         </TabList>
 
@@ -109,8 +111,8 @@ export default function Home() {
               {/* <ReactSortable list={tasks} setList={setTasks}> */}
               {tasks.map((task, index) => (
                 <tr key={task.id} className={
-                  `flex gap-2 justify-between items-center px-2 py-4 ` + (taskIndex == index ? "bg-red-50" : "")
-                }>
+                  `flex gap-2 justify-between items-center px-2 py-4 ` + (taskIndex == index ? "bg-black/10" : "")
+                } onClick={() => setTaskIndex(index)}>
                   <td>{task.id}</td>
                   <td>{task.name}</td>
                   <td>{task.labels[0]}</td>
