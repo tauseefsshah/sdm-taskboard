@@ -2,17 +2,11 @@ import { TaskModal } from "./TaskModal";
 import { useEffect, useState } from "react";
 
 export function TaskList({ status, allTasks, setAllTasks }) {
-  const currentListAllTasks = allTasks.filter((task) => task.status == status);
-
-  const [currentListTasks, setCurrentListTasks] = useState([]);
+  const [taskIndex, setTaskIndex] = useState(0);
 
   const [isTaskOpen, setIsTaskOpen] = useState(false);
 
-  const [taskIndex, setTaskIndex] = useState(0);
-
-  useEffect(() => {
-    setCurrentListTasks(allTasks.filter((task) => task.status == status));
-  }, [allTasks, status]);
+  const [currentListTasks, setCurrentListTasks] = useState([]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown" && taskIndex != currentListTasks.length - 1) {
@@ -33,6 +27,10 @@ export function TaskList({ status, allTasks, setAllTasks }) {
   };
 
   useEffect(() => {
+    setCurrentListTasks(allTasks.filter((task) => task.status == status));
+  }, [allTasks, status]);
+
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -42,7 +40,10 @@ export function TaskList({ status, allTasks, setAllTasks }) {
 
   return (
     <div className="w-full flex flex-col gap-8">
-      <div className="grid grid-cols-2 items-center gap-4 text-sm lg:grid-cols-4">
+      <div
+        id="insights"
+        className="grid grid-cols-2 items-center gap-4 text-sm lg:grid-cols-4"
+      >
         <p>
           <span className="font-bold">📊 Total Tasks:</span>{" "}
           {currentListTasks.length}
@@ -60,23 +61,29 @@ export function TaskList({ status, allTasks, setAllTasks }) {
           {currentListTasks.filter((task) => task.priority == "low").length}
         </p>
       </div>
+
       <div id="search">
         <input
-          type="text"
+          type="search"
           name="search"
           id="search"
           placeholder="Search Tasks"
           className="border-2 w-full p-2 rounded-lg"
           onChange={(e) =>
             setCurrentListTasks(
-              currentListAllTasks.filter((task) =>
-                task.name.includes(e.target.value)
+              allTasks.filter(
+                (task) =>
+                  task.status == status && task.name.includes(e.target.value)
               )
             )
           }
         />
       </div>
-      <div className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-8">
+
+      <div
+        id="tasks"
+        className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-8"
+      >
         <div>#</div>
         <div className="col-span-3">Name</div>
         <div className="hidden lg:block">Labels</div>
