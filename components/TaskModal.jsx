@@ -39,21 +39,23 @@ export function TaskModal({
 
           setConfirmAction(true);
         }
-      }
-
-      if (
-        ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"].includes(event.key)
-      ) {
-        event.stopPropagation();
-        event.preventDefault();
 
         if (
-          event.key === "ArrowRight" &&
-          taskIndex != currentListTasksLength - 1
+          ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"].includes(
+            event.key
+          )
         ) {
-          setTaskIndex(taskIndex + 1);
-        } else if (event.key === "ArrowLeft" && taskIndex != 0) {
-          setTaskIndex(taskIndex - 1);
+          event.stopPropagation();
+          event.preventDefault();
+
+          if (
+            event.key === "ArrowRight" &&
+            taskIndex != currentListTasksLength - 1
+          ) {
+            setTaskIndex(taskIndex + 1);
+          } else if (event.key === "ArrowLeft" && taskIndex != 0) {
+            setTaskIndex(taskIndex - 1);
+          }
         }
       }
     };
