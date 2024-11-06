@@ -82,20 +82,21 @@ export function TaskList({ status, allTasks, setAllTasks }) {
 
       <div
         id="tasks"
-        className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-8"
+        className="grid grid-cols-6 gap-1 items-center text-center px-2 font-bold lg:grid-cols-9"
       >
         <div>#</div>
         <div className="col-span-3">Name</div>
         <div className="hidden lg:block">Labels</div>
         <div className="hidden lg:block">Priority</div>
         <div className="col-span-2">Assignee</div>
+        <div className="col-span-1">Due</div>
       </div>
 
       {currentListTasks.map((task, index) => (
         <div
           key={task.id}
           className={
-            `grid grid-cols-6 gap-1 items-center text-center px-2 py-4 text-sm lg:grid-cols-8 ` +
+            `grid grid-cols-6 gap-1 items-center text-center px-2 py-4 text-sm lg:grid-cols-9 ` +
             (taskIndex == index ? "bg-black/10" : "")
           }
           onClick={() => setTaskIndex(index)}
@@ -114,6 +115,7 @@ export function TaskList({ status, allTasks, setAllTasks }) {
             </span>
           </div>
           <div className="col-span-2">{task.assignee}</div>
+          <div>{new Date(task.due_at).toLocaleDateString()}</div>
         </div>
       ))}
 
