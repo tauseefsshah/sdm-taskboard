@@ -180,7 +180,10 @@ export function TaskModal({
                   </button>
 
                   <button
-                    onClick={() => setConfirmAction(false)}
+                    onClick={() => {
+                      setConfirmAction(false);
+                      setStatus(task.status);
+                    }}
                     className="px-4 py-2 bg-gray-100 rounded"
                   >
                     Cancel
