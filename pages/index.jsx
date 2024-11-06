@@ -21,23 +21,6 @@ const geistMono = localFont({
 export default function Home() {
   const [tasks, setTasks] = useState([]);
 
-  const [tabIndex, setTabIndex] = useState(0);
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "1") {
-        setTabIndex(0);
-      } else if (event.key === "2") {
-        setTabIndex(1);
-      } else if (event.key === "3") {
-        setTabIndex(2);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   useEffect(() => {
     fetch("/api/tasks")
       .then((response) => {
@@ -63,8 +46,6 @@ export default function Home() {
           autoFocus={true}
           defaultFocus={true}
           disableUpDownKeys={true}
-          selectedIndex={tabIndex}
-          onSelect={(index) => setTabIndex(index)}
           selectedTabClassName="bg-black/50 text-white rounded-xl"
         >
           <TabList className="flex justify-between mb-12 uppercase font-bold text-sm lg:text-md">

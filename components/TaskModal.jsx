@@ -12,6 +12,28 @@ export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
     setIsTaskOpen(isOpen);
   }, [isOpen, setIsTaskOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (["1", "2", "3"].includes(event.key)) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if (event.key === "1") {
+          setStatus("open");
+        } else if (event.key === "2") {
+          setStatus("in-progress");
+        } else if (event.key === "3") {
+          setStatus("closed");
+        }
+
+        setConfirmAction(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const updateTaskStatus = () => {
     let newTasks = [...allTasks];
 

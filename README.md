@@ -36,3 +36,7 @@ Go through to commits to see how the app progressed. I was told by someone that 
 - **Client-side Data Fetching** - I am using `fetch()` with `useEffect()` to get data from the `api/tasks` endpoint rather than `get*Props()` to keep things simple
 - **Tailwind Inline Styling** - Madly in love with TailwindCSS and prefer using inline tailwind classes over custom classes. On large projects, components for everything are used and this works well with that.
 - **Context Management With UseState** - Not using `redux` to keep things simple
+
+## Ceveats
+- After opening modals, need to press tab to bring focus on tabs to use arow keys to transverse across tabs
+- In the status update modal modal, enter button doesn't work
