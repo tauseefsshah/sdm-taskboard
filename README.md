@@ -38,5 +38,5 @@ Go through to commits to see how the app progressed. I was told by someone that 
 - **Context Management With UseState** - Not using `redux` to keep things simple
 
 ## Ceveats
-- After opening modals, need to press tab to bring focus on tabs to use arow keys to transverse across tabs
-- In the status update modal modal, enter button doesn't work
+- Someimtes after opening modals or clicking on search, need to press tab to bring focus on tabs to use arow keys to transverse across tabs
+- In the status update modal, enter button doesn't work
