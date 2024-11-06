@@ -11,8 +11,8 @@ export function TaskList({ status, allTasks, setAllTasks }) {
   const [taskIndex, setTaskIndex] = useState(0);
 
   useEffect(() => {
-    setCurrentListTasks(currentListAllTasks);
-  }, [currentListAllTasks, setCurrentListTasks]);
+    setCurrentListTasks(allTasks.filter((task) => task.status == status));
+  }, [allTasks, status]);
 
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown" && taskIndex != currentListTasks.length - 1) {

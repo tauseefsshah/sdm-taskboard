@@ -1,7 +1,7 @@
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Alert({ children, setIsOpen }) {
+export default function Alert({ children, setIsOpen, disableKeys = true }) {
   const customStyles = {
     content: {
       top: "50%",
@@ -12,6 +12,25 @@ export default function Alert({ children, setIsOpen }) {
       transform: "translate(-50%, -50%)",
     },
   };
+
+  useEffect(() => {
+    if (disableKeys === true) {
+      const handleKeyDown = (e) => {
+        if (
+          ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)
+        ) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }
+  }, [disableKeys]);
 
   Modal.setAppElement("#__next");
 

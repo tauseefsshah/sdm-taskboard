@@ -25,7 +25,7 @@ export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
   return (
     <div>
       {isOpen && (
-        <Alert setIsOpen={setIsOpen}>
+        <Alert setIsOpen={setIsOpen} disableKeys={false}>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-4 justify-between items-start lg:flex-row lg:items-center">
               <h2 className="text-xl font-bold">{task.name}</h2>
