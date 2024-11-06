@@ -89,7 +89,7 @@ export function TaskList({ status, allTasks, setAllTasks }) {
         <div className="hidden lg:block">Labels</div>
         <div className="hidden lg:block">Priority</div>
         <div className="col-span-2">Assignee</div>
-        <div className="col-span-1">Due</div>
+        <div className="hidden lg:block">Due</div>
       </div>
 
       {currentListTasks.map((task, index) => (
@@ -115,7 +115,7 @@ export function TaskList({ status, allTasks, setAllTasks }) {
             </span>
           </div>
           <div className="col-span-2">{task.assignee}</div>
-          <div>{new Date(task.due_at).toLocaleDateString()}</div>
+          <div className="hidden lg:block">{new Date(task.due_at).toLocaleDateString()}</div>
         </div>
       ))}
 
