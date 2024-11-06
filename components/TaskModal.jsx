@@ -1,7 +1,15 @@
 import Alert from "./Alert";
 import { useEffect, useState } from "react";
 
-export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
+export function TaskModal({
+  task,
+  allTasks,
+  setAllTasks,
+  setIsTaskOpen,
+  taskIndex,
+  setTaskIndex,
+  currentListTasksLength,
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   const [status, setStatus] = useState(task.status);
@@ -32,11 +40,27 @@ export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
           setConfirmAction(true);
         }
       }
+
+      if (
+        ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"].includes(event.key)
+      ) {
+        event.stopPropagation();
+        event.preventDefault();
+
+        if (
+          event.key === "ArrowRight" &&
+          taskIndex != currentListTasksLength - 1
+        ) {
+          setTaskIndex(taskIndex + 1);
+        } else if (event.key === "ArrowLeft" && taskIndex != 0) {
+          setTaskIndex(taskIndex - 1);
+        }
+      }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isInputInFocus]);
+  }, [isInputInFocus, taskIndex, setTaskIndex, currentListTasksLength]);
 
   const updateTaskStatus = () => {
     let newTasks = [...allTasks];

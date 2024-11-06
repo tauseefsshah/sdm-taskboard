@@ -115,7 +115,9 @@ export function TaskList({ status, allTasks, setAllTasks }) {
             </span>
           </div>
           <div className="col-span-2">{task.assignee}</div>
-          <div className="hidden lg:block">{new Date(task.due_at).toLocaleDateString()}</div>
+          <div className="hidden lg:block">
+            {new Date(task.due_at).toLocaleDateString()}
+          </div>
         </div>
       ))}
 
@@ -125,6 +127,10 @@ export function TaskList({ status, allTasks, setAllTasks }) {
           allTasks={allTasks}
           setAllTasks={setAllTasks}
           setIsTaskOpen={setIsTaskOpen}
+
+          taskIndex={taskIndex}
+          setTaskIndex={setTaskIndex}
+          currentListTasksLength={currentListTasks.length}
         ></TaskModal>
       )}
     </div>
