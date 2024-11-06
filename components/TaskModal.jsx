@@ -8,31 +8,35 @@ export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
 
   const [confirmAction, setConfirmAction] = useState(false);
 
+  const [isInputInFocus, setIsInputInFocus] = useState(false);
+
   useEffect(() => {
     setIsTaskOpen(isOpen);
   }, [isOpen, setIsTaskOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (["1", "2", "3"].includes(event.key)) {
-        event.stopPropagation();
-        event.preventDefault();
+      if (!isInputInFocus) {
+        if (["1", "2", "3"].includes(event.key)) {
+          event.stopPropagation();
+          event.preventDefault();
 
-        if (event.key === "1") {
-          setStatus("open");
-        } else if (event.key === "2") {
-          setStatus("in-progress");
-        } else if (event.key === "3") {
-          setStatus("closed");
+          if (event.key === "1") {
+            setStatus("open");
+          } else if (event.key === "2") {
+            setStatus("in-progress");
+          } else if (event.key === "3") {
+            setStatus("closed");
+          }
+
+          setConfirmAction(true);
         }
-
-        setConfirmAction(true);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isInputInFocus]);
 
   const updateTaskStatus = () => {
     let newTasks = [...allTasks];
@@ -106,9 +110,11 @@ export function TaskModal({ task, allTasks, setAllTasks, setIsTaskOpen }) {
             </div>
             <div>
               <textarea
-                className="border-2 p-2 w-full"
                 rows={5}
+                className="border-2 p-2 w-full"
                 placeholder="Write new comment here, press enter to submit"
+                onFocus={() => setIsInputInFocus(true)}
+                onBlur={() => setIsInputInFocus(false)}
               ></textarea>
             </div>
           </div>
