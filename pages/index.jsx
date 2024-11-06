@@ -38,6 +38,7 @@ export default function Home() {
       className={`${geistSans.variable} ${geistMono.variable} mx-auto p-2 bg-white lg:p-8`}
     >
       <Tabs
+        autoFocus={true}
         defaultFocus={true}
         disableUpDownKeys={true}
         selectedTabClassName="bg-black/50 text-white rounded-xl"
@@ -49,11 +50,7 @@ export default function Home() {
         </TabList>
 
         <TabPanel>
-          <TaskList
-            status="open"
-            allTasks={tasks}
-            setAllTasks={setTasks}
-          />
+          <TaskList status="open" allTasks={tasks} setAllTasks={setTasks} />
         </TabPanel>
 
         <TabPanel>
@@ -65,11 +62,7 @@ export default function Home() {
         </TabPanel>
 
         <TabPanel>
-          <TaskList
-            status="closed"
-            allTasks={tasks}
-            setAllTasks={setTasks}
-          />
+          <TaskList status="closed" allTasks={tasks} setAllTasks={setTasks} />
         </TabPanel>
       </Tabs>
     </main>
