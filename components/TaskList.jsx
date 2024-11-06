@@ -96,20 +96,20 @@ export function TaskList({ status, allTasks, setAllTasks }) {
         <div
           key={task.id}
           className={
-            `grid grid-cols-6 gap-1 items-center text-center px-2 py-4 text-sm lg:grid-cols-9 ` +
-            (taskIndex == index ? "bg-black/10" : "")
+            `grid grid-cols-6 gap-1 items-center rounded-xl text-center px-2 py-4 text-sm lg:grid-cols-9 ` +
+            (taskIndex == index ? "bg-red-200/50" : "")
           }
           onClick={() => setTaskIndex(index)}
           onDoubleClick={() => setIsTaskOpen(true)}
         >
           <div>{task.id}</div>
           <div className="col-span-3">{task.name}</div>
-          <div className="text-xs font-bold hidden lg:block">
+          <div className="font-bold hidden lg:block">
             <span className="px-2 py-1 bg-black text-white rounded-xl">
               {task.label}
             </span>
           </div>
-          <div className="text-xs font-bold hidden lg:block">
+          <div className="font-bold hidden lg:block">
             <span className="px-2 py-1 bg-red-500 text-white rounded-xl">
               {task.priority}
             </span>

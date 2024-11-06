@@ -46,7 +46,7 @@ export default function Home() {
           autoFocus={true}
           defaultFocus={true}
           disableUpDownKeys={true}
-          selectedTabClassName="bg-black/50 text-white rounded-xl"
+          selectedTabClassName="bg-red-200/50 rounded-xl"
         >
           <TabList className="flex justify-between mb-12 uppercase font-bold text-sm lg:text-md">
             <Tab>🔴 Open</Tab>
